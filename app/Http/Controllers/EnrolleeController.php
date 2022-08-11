@@ -152,5 +152,4 @@ class enrolleeController extends Controller
         }
         dump('initialized');
     }
-    //
 }

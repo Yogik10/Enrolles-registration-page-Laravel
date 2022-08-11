@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\EnrolleeController;
+use App\Http\Controllers\RegistrationController;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,8 +15,9 @@ use App\Http\Controllers\EnrolleeController;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+//enrollee registration page
+Route::get('/enrollee/create', [RegistrationController::class, 'create'])->name('enrollee.create');
+Route::post('/enrollee', [RegistrationController::class, 'store'])->name('enrollee.store');
 
+//first initialization for db
 Route::get('/initialize', [EnrolleeController::class, 'initialize']);
