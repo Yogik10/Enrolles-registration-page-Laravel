@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('name', 50);
             $table->string('surname', 50);
             $table->string('sex', 1);
-            $table->string('group_number', 4);
+            $table->string('group_number', 5);
             $table->string('email', 50)->unique();
             $table->smallInteger('points');
             $table->smallInteger('birth_year');
