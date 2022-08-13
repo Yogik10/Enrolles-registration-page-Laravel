@@ -19,5 +19,8 @@ use App\Http\Controllers\RegistrationController;
 Route::get('/enrollee/create', [RegistrationController::class, 'create'])->name('enrollee.create');
 Route::post('/enrollee', [RegistrationController::class, 'store'])->name('enrollee.store');
 
+//enrollees list page
+Route::get('/enrollee', [EnrolleeController::class, 'index'])->name('enrollee.index');
+
 //first initialization for db
 Route::get('/initialize', [EnrolleeController::class, 'initialize']);

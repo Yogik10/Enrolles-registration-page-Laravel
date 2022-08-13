@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use App\Models\Enrollee;
 
 class enrolleeController extends Controller
@@ -151,5 +152,33 @@ class enrolleeController extends Controller
             dump($enrollee);
         }
         dump('initialized');
+    }
+
+    public function index(Request $request){
+        $page = $request->input('page') == 0 ? 1 : $request->input('page');
+        $enrollees = DB::table('enrollees');
+        if ($request->input('sort') == 0)
+            $enrollees = $enrollees->orderBy('points', 'desc')->paginate(10);
+        if ($request->input('sort') == 'points_asc')
+            $enrollees = $enrollees->orderBy('points', 'asc')->paginate(10);
+        if ($request->input('sort') == 'points_desc')
+            $enrollees = $enrollees->orderBy('points', 'desc')->paginate(10);
+        if ($request->input('sort') == 'name_asc')
+            $enrollees = $enrollees->orderBy('name', 'asc')->paginate(10);
+        if ($request->input('sort') == 'name_desc')
+            $enrollees = $enrollees->orderBy('name', 'desc')->paginate(10);
+        if ($request->input('sort') == 'surname_asc')
+            $enrollees = $enrollees->orderBy('surname', 'asc')->paginate(10);
+        if ($request->input('sort') == 'surname_desc')
+            $enrollees = $enrollees->orderBy('surname', 'desc')->paginate(10);
+        if ($request->input('sort') == 'group_number_asc')
+            $enrollees = $enrollees->orderBy('group_number', 'asc')->paginate(10);
+        if ($request->input('sort') == 'group_number_desc')
+            $enrollees = $enrollees->orderBy('group_number', 'desc')->paginate(10);
+        return view('enrollees_list', ['enrollees' => $enrollees,
+                                            'page_count' => ceil(count(Enrollee::all()) / 10),
+                                            'page' => $page,
+                                            'enrollees_in_page' => 10,
+                                            'request' => $request]);
     }
 }

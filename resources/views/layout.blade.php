@@ -31,7 +31,7 @@
             text-align: center;
             font-family: 'Roboto', sans-serif;
         }
-        .registration_container{
+        .registration_container, .table_container{
             background: #cbd5e0;
             border-radius: 30px;
             padding: 30px 20px;
@@ -80,6 +80,61 @@
             font-size: 30pt;
             text-align: center;
             font-family: 'Roboto', sans-serif;
+        }
+
+
+
+
+        .table_container{
+            padding: 20px 20px;
+        }
+        .table_container table th{
+            text-align: center;
+        }
+        .table_container table th a{
+            color: black;
+            text-decoration: none;
+            text-shadow: #a9c8fd 2px 1px;
+        }
+        .table_container table td, .table_container table th, .table_container table caption{
+            padding: 0 20px;
+            font-size: 14pt;
+        }
+        .table_container table {
+            background: azure;
+            border-radius: 20px;
+            border-collapse: inherit;
+            border-spacing: 0;
+        }
+        .table_container caption{
+            margin-bottom: 10px;
+        }
+        .table_container table td, .table_container table th{
+            border: 1px solid #4a5568;
+            padding-top: 5px;
+            padding-bottom: 5px;
+        }
+        .table_container table tr:first-child th:first-child {
+            border-radius: 20px 0 0 0;
+        }
+        .table_container table tr:first-child th:last-child {
+            border-radius: 0 20px 0 0;
+        }
+        .table_container table tr:last-child td:first-child {
+            border-radius: 0 0 0 20px;
+        }
+        .table_container table tr:last-child td:last-child {
+            border-radius: 0 0 20px 0;
+        }
+        .page_container{
+            text-align: center;
+        }
+        .page_container a{
+            text-decoration: none;
+        }
+        .selected_page{
+            color: black;
+            pointer-events: none;
         }
     </style>
     {{--    <link href={{URL::asset('/enrollees/public/app.css')}} rel="stylesheet">--}}
