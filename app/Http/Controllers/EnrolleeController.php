@@ -156,29 +156,50 @@ class enrolleeController extends Controller
 
     public function index(Request $request){
         $page = $request->input('page') == 0 ? 1 : $request->input('page');
-        $enrollees = DB::table('enrollees');
-        if ($request->input('sort') == 0)
-            $enrollees = $enrollees->orderBy('points', 'desc')->paginate(10);
-        if ($request->input('sort') == 'points_asc')
-            $enrollees = $enrollees->orderBy('points', 'asc')->paginate(10);
-        if ($request->input('sort') == 'points_desc')
-            $enrollees = $enrollees->orderBy('points', 'desc')->paginate(10);
-        if ($request->input('sort') == 'name_asc')
-            $enrollees = $enrollees->orderBy('name', 'asc')->paginate(10);
-        if ($request->input('sort') == 'name_desc')
-            $enrollees = $enrollees->orderBy('name', 'desc')->paginate(10);
-        if ($request->input('sort') == 'surname_asc')
-            $enrollees = $enrollees->orderBy('surname', 'asc')->paginate(10);
-        if ($request->input('sort') == 'surname_desc')
-            $enrollees = $enrollees->orderBy('surname', 'desc')->paginate(10);
-        if ($request->input('sort') == 'group_number_asc')
-            $enrollees = $enrollees->orderBy('group_number', 'asc')->paginate(10);
-        if ($request->input('sort') == 'group_number_desc')
-            $enrollees = $enrollees->orderBy('group_number', 'desc')->paginate(10);
+        $enrollees = ($this->order($request, DB::table('enrollees')))->paginate(10);
+
         return view('enrollees_list', ['enrollees' => $enrollees,
                                             'page_count' => ceil(count(Enrollee::all()) / 10),
                                             'page' => $page,
                                             'enrollees_in_page' => 10,
-                                            'request' => $request]);
+                                            'request' => $request,
+                                            'search' => '']);
+    }
+
+    public function search(Request $request){
+        $page = $request->input('page') == 0 ? 1 : $request->input('page');
+        $enrollees = DB::table('enrollees')->where([['name', 'like', '%'.$request->input('search').'%']])
+            ->orWhere([['surname', 'like', '%'.$request->input('search').'%']])
+            ->orWhere([['group_number', 'like', '%'.$request->input('search').'%']]);
+        $page_count = ceil(count($enrollees->get()) / 10);
+        $enrollees = ($this->order($request, $enrollees))->paginate(10);
+
+        return view('enrollees_search', ['enrollees' => $enrollees,
+                                            'page_count' => $page_count,
+                                            'page' => $page,
+                                            'enrollees_in_page' => 10,
+                                            'request' => $request,
+                                            'search' => $request->input('search')]);
+    }
+
+    public function order($request, $enrollees){
+        if ($request->input('sort') == 0)
+            return $enrollees->orderBy('points', 'desc');
+        if ($request->input('sort') == 'points_asc')
+            return $enrollees->orderBy('points', 'asc');
+        if ($request->input('sort') == 'points_desc')
+            return $enrollees->orderBy('points', 'desc');
+        if ($request->input('sort') == 'name_asc')
+            return $enrollees->orderBy('name', 'asc');
+        if ($request->input('sort') == 'name_desc')
+            return $enrollees->orderBy('name', 'desc');
+        if ($request->input('sort') == 'surname_asc')
+            return $enrollees->orderBy('surname', 'asc');
+        if ($request->input('sort') == 'surname_desc')
+            return $enrollees->orderBy('surname', 'desc');
+        if ($request->input('sort') == 'group_number_asc')
+            return $enrollees->orderBy('group_number', 'asc');
+        if ($request->input('sort') == 'group_number_desc')
+            return $enrollees->orderBy('group_number', 'desc');
     }
 }

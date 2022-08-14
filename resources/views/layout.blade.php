@@ -50,12 +50,13 @@
             display: flex;
             justify-content: space-evenly;
         }
-        .fio_container input, .input_container input{
+        .fio_container input, .input_container input, .search_container input{
             text-align: center;
             border-radius: 5px;
             border: 2px solid aqua;
             height: 25px;
             margin: 0 20px 10px 20px;
+            font-family: 'Open Sans', sans-serif;
         }
         .sex_container{
             display: inline;
@@ -81,12 +82,46 @@
             text-align: center;
             font-family: 'Roboto', sans-serif;
         }
+        .modal a{
+            text-decoration: none;
+            font-size: 20pt;
+        }
 
 
 
 
         .table_container{
-            padding: 20px 20px;
+            padding: 10px 20px 10px 20px;
+        }
+        .caption{
+            display: flex;
+            flex-direction: row;
+            justify-content: space-around;
+            align-items: center;
+        }
+        .search_container{
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            padding-left: 20px;
+        }
+        .search_container input{
+            margin-top: auto;
+            margin-bottom: auto;
+        }
+        .search_container a{
+            color:black;
+            background: aqua;
+            /*height: 10px;*/
+            margin: auto 0 auto 0;
+            padding: 5px 15px;
+            border-radius: 5px;
+            font: inherit;
+            cursor: pointer;
+            text-decoration: none;
+        }
+        .search_container a:active, button:active{
+            background: #40b6b6;
         }
         .table_container table th{
             text-align: center;
@@ -145,5 +180,12 @@
     <div class="main_container">
         @yield('content')
     </div>
+
+    <script type="text/javascript">
+        function navigate(link, inputid){
+            let url = link + "?search=" + document.getElementById(inputid).value;
+            window.location.href = url;
+        }
+    </script>
 </body>
 </html>

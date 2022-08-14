@@ -21,6 +21,7 @@ Route::post('/enrollee', [RegistrationController::class, 'store'])->name('enroll
 
 //enrollees list page
 Route::get('/enrollee', [EnrolleeController::class, 'index'])->name('enrollee.index');
+Route::get('/enrollee/search', [EnrolleeController::class, 'search'])->name('enrollee.search');
 
 //first initialization for db
 Route::get('/initialize', [EnrolleeController::class, 'initialize']);

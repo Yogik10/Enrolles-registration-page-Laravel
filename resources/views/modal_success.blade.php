@@ -9,5 +9,6 @@
 @section('content')
     <div class="modal">
         <p>Вы успешно зарегистрированы!</p>
+        <a href="{{route('enrollee.index')}}">К списку абитуриентов</a>
     </div>
 @endsection
