@@ -45,7 +45,7 @@
 @endsection
 
 @section('points_asc')
-    <a href="{{route('enrollee.index')}}?sort=name_asc&page={{$request['page']}}">Баллов</a>
+    <a href="{{route('enrollee.index')}}?sort=points_asc&page={{$request['page']}}">Баллов</a>
 @endsection
 
 @section('points_desc')
