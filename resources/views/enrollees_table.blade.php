@@ -37,7 +37,7 @@
                         @endif
                     </th>
                     <th>
-                        @if ($request->input('sort') == 'points_asc' || $request->input('sort') == 0)
+                        @if ($request->input('sort') == 'points_desc' || $request->input('sort') == 0)
                             @yield('points_asc')
                         @else
                             @yield('points_desc')
